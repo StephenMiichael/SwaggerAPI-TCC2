@@ -1,0 +1,1332 @@
+openapi: 3.0.3
+info: 
+  title: API do TCC 3
+  description: API para controlar o back-end do aplicativo do museu. Através dela, é possível controlar os clientes, administradores, produtos, cupons, quizzes, emblemas e entre outros.
+  version: 0.0.1
+  contact:
+    name: Stephen Michael Apolinário
+    email: stephen@edu.univali.br
+  # termsOfService: https://mockapi.io
+# externalDocs:
+#   description: Documentação da api
+#   url: https://mockapi.io
+servers: 
+- url: https://63693d2228cd16bba718cc8b.mockapi.io/api/v1/
+  description: API TCC-2!
+paths:
+  /produtos:
+    get:
+      summary: Recupera todos os produtos
+      tags: 
+      - Produtos
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/Produtos"
+    post:
+      summary: Cria um novo produto
+      tags: 
+      - Produtos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                imagem:
+                  type: string
+                preco:
+                  type: number
+                descricao:
+                  type: string
+                created_at:
+                  type: integer
+                  example: "1667843830"
+                updated_at:
+                  type: integer
+                  example: "1667843830"
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Produto"
+  /produtos/{id}:
+    parameters: 
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera um produto pelo id
+      tags: 
+      - Produtos
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Produto"
+        404:
+          description: Produto não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    put:
+      summary: Atualiza um produto pelo id
+      tags:
+        - Produtos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                imagem:
+                  type: string
+                preco:
+                  type: number
+                descricao:
+                  type: string
+                updated_at:
+                  type: integer
+                  example: "1667843830"
+      responses: 
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Produto"
+        404:
+          description: Produto não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    delete:
+      summary: Deleta um produto pelo id
+      tags: 
+        - Produtos
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Produto"
+        404:
+          description: Produto não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+  
+  /administradores:
+    get:
+      summary: Recupera todos os administradores
+      tags: 
+      - Administradores
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/Administradores"
+    post:
+      summary: Cria um novo administrador
+      tags: 
+      - Administradores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                imagem:
+                  type: string
+                email:
+                  type: string
+                senha:
+                  type: string
+                created_at:
+                  type: integer
+                  example: "1667843830"
+                updated_at:
+                  type: integer
+                  example: "1667843830"
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Administrador"
+  /administradores/{id}:
+    parameters: 
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera um administrador pelo id
+      tags: 
+      - Administradores
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Administrador"
+        404:
+          description: Administrador não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    put:
+      summary: Atualiza um administrador pelo id
+      tags:
+        - Administradores
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                imagem:
+                  type: string
+                email:
+                  type: number
+                senha:
+                  type: string
+                updated_at:
+                  type: integer
+                  example: "1667843830"
+      responses: 
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Administrador"
+        404:
+          description: Administrador não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    delete:
+      summary: Deleta um administrador pelo id
+      tags: 
+        - Administradores
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Administrador'
+        404:
+          description: Administrador não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+  /alas:
+    get:
+      summary: Recupera todos as alas
+      tags: 
+      - Alas
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/Alas"
+    post:
+      summary: Cria uma nova ala
+      tags: 
+      - Alas
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                imagem:
+                  type: string
+                descricao:
+                  type: string
+                pontos_de_interesse:
+                  type: object
+                created_at:
+                  type: integer
+                  example: "1667843830"
+                updated_at:
+                  type: integer
+                  example: "1667843830"
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ala"
+  /alas/{id}:
+    parameters: 
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera uma ala pelo id
+      tags: 
+      - Alas
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ala"
+        404:
+          description: Ala não encontrada.
+          content:
+            application/json:
+              example: "Not found"
+    put:
+      summary: Atualiza uma ala pelo id
+      tags:
+        - Alas
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                descricao:
+                  type: string
+                pontos_de_interesse:
+                  type: object
+                updated_at:
+                  type: integer
+                  example: "1667843830"
+      responses: 
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ala"
+        404:
+          description: Ala não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    delete:
+      summary: Deleta uma ala pelo id
+      tags: 
+        - Alas
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ala'
+        404:
+          description: Ala não encontrada.
+          content:
+            application/json:
+              example: "Not found"
+  /usuarios:
+    get:
+      summary: Recupera todos os usuarios
+      tags: 
+      - "Usuários"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/Usuarios"
+    post:
+      summary: Cria uma novo usuário
+      tags: 
+      - "Usuários"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                emblemasId:
+                  type: object
+                nome:
+                  type: string
+                imagem:
+                  type: string
+                email:
+                  type: string
+                data_nascimento:
+                  type: string
+                cpf:
+                  type: string
+                celular:
+                  type: string
+                cep:
+                  type: string
+                pais:
+                  type: string
+                estado:
+                  type: string
+                cidade:
+                  type: string
+                bairro:
+                  type: string
+                endereco:
+                  type: string
+                numero:
+                  type: integer
+                senha:
+                  type: string
+                quizzes:
+                  type: object
+                compras:
+                    type: object
+                created_at:
+                  type: integer
+                  example: "1667843830"
+                updated_at: 
+                  type: integer
+                  example: "1667843830"
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+  /usuarios/{id}:
+    parameters: 
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera uma usuário pelo id
+      tags: 
+      - "Usuários"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        404:
+          description: Usuário não encontrado
+          content:
+            application/json:
+              example: "Not found"
+    put:
+      summary: Atualiza um usuário pelo id
+      tags:
+        - "Usuários"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                emblemasId:
+                  type: object
+                nome:
+                  type: string
+                imagem:
+                  type: string
+                email:
+                  type: string
+                data_nascimento:
+                  type: string
+                cpf:
+                  type: string
+                celular:
+                  type: string
+                cep:
+                  type: string
+                pais:
+                  type: string
+                estado:
+                  type: string
+                cidade:
+                  type: string
+                bairro:
+                  type: string
+                endereco:
+                  type: string
+                numero:
+                  type: integer
+                senha:
+                  type: string
+                quizzes:
+                  type: object
+                compras:
+                    type: object
+                created_at:
+                  type: integer
+                  example: "1667843830"
+                updated_at: 
+                  type: integer
+                  example: "1667843830"
+      responses: 
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Usuario"
+        404:
+          description: Usuário não encontrado
+          content:
+            application/json:
+              example: "Not found"
+    delete:
+      summary: Deleta um usuário pelo id
+      tags: 
+        - "Usuários"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usuario'
+        404:
+          description: Usuário não encontrado
+          content:
+            application/json:
+              example: "Not found"
+  /usuarios/{id}/emblemas:
+    parameters: 
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera as emblemas de um usuário
+      tags: 
+      - "Usuários"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Emblemas"
+        404:
+          description: Usuário não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+  /usuarios/{id}/quizzes:
+    parameters: 
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera os quizzes de um usuário
+      tags: 
+      - "Usuários"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: 
+                    nome:
+                      type: object
+                    perguntas:
+                      type: object
+                    respostas:
+                      type: object
+                    pontuacao:
+                      type: number
+                      example: 500
+                    emblemaId: 
+                      type: number
+                      example: 1
+                    created_at:
+                      type: integer
+                      example: "1667843830"
+                    updated_at: 
+                      type: integer
+                      example: "1667843830"                    
+        404:
+          description: Usuário não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+  /emblemas:
+    get:
+      summary: Recupera todas as emblemas
+      tags: 
+      - "Emblemas"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/Emblemas"
+    post:
+      summary: Cria uma nova emblema
+      tags: 
+      - "Emblemas"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                imagem:
+                  type: string
+                tipo:
+                  type: string
+                quizzId:
+                  type: number
+                created_at:
+                  type: integer
+                  example: "1667843830"
+                updated_at: 
+                  type: integer
+                  example: "1667843830"
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Emblema"
+  /emblemas/{id}:
+    parameters: 
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera uma emblema pelo id
+      tags: 
+      - "Emblemas"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Emblema"
+        404:
+          description: Emblema não encontrada.
+          content:
+            application/json:
+              example: "Not found"
+    put:
+      summary: Atualiza uma emblema pelo id
+        - "Emblemas"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                imagem:
+                  type: string
+                tipo:
+                  type: string
+                quizzId:
+                  type: number
+                created_at:
+                  type: integer
+                  example: "1667843830"
+                updated_at: 
+                  type: integer
+                  example: "1667843830"
+      responses: 
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Emblema"
+        404:
+          description: Emblema não encontrada.
+          content:
+            application/json:
+              example: "Not found"
+    delete:
+      summary: Deleta uma emblema pelo id
+      tags: 
+        - "Emblemas"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Emblema'
+        404:
+          description: Emblema não encontrada.
+          content:
+            application/json:
+              example: "Not found"
+  /quizzes:
+    get:
+      summary: Recupera todos os quizzes
+      tags: 
+      - "Quizzes"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/Quizzes"
+    post:
+      summary: Cria um novo quizz
+      tags: 
+      - "Quizzes"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tourId:
+                  type: number
+                nome:
+                  type: string
+                perguntas:
+                  type: object
+                respostas:
+                  type: object
+                created_at:
+                  type: integer
+                  example: "1667843830"
+                updated_at: 
+                  type: integer
+                  example: "1667843830"
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quizz"
+  /quizzes/{id}:
+    parameters: 
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera um quizz pelo id
+      tags: 
+      - "Quizzes"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quizz"
+        404:
+          description: Quizz não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    put:
+      summary: Atualiza uma quizz pelo id
+      tags:
+        - "Quizzes"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tourId:
+                  type: number
+                nome:
+                  type: string
+                perguntas:
+                  type: object
+                respostas:
+                  type: object
+                created_at:
+                  type: integer
+                  example: "1667843830"
+                updated_at: 
+                  type: integer
+                  example: "1667843830"
+      responses: 
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quizz"
+        404:
+          description: Quizz não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    delete:
+      summary: Deleta uma quizz pelo id
+      tags: 
+        - "Quizzes"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quizz'
+        404:
+          description: Quizz não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+  /pontos_de_interesse:
+    get:
+      summary: Recupera todos os pontos de interesse
+      tags: 
+      - "Pontos de interesse"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/PontosDeInteresse'
+    post:
+      summary: Cria um novo ponto de interesse
+      tags: 
+      - "Pontos de interesse"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tourId:
+                  type: number
+                ponto_id:
+                  type: string
+                descricao:
+                  type: object
+                created_at:
+                  type: integer
+                  example: "1667843830"
+                updated_at: 
+                  type: integer
+                  example: "1667843830"
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PontoDeInteresse'
+  /pontos_de_interesse/{id}:
+    parameters: 
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera um ponto de interesse pelo id
+      tags: 
+      - "Pontos de interesse"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PontoDeInteresse'
+        404:
+          description: Ponto de interesse não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    put:
+      summary: Atualiza uma ponto de interesse pelo id
+      tags:
+      - "Pontos de interesse"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tourId:
+                  type: number
+                ponto_id:
+                  type: string
+                descricao:
+                  type: object
+                created_at:
+                  type: integer
+                  example: "1667843830"
+                updated_at: 
+                  type: integer
+                  example: "1667843830"
+      responses: 
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quizz"
+        404:
+          description: Quizz não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    delete:
+      summary: Deleta uma ponto de interesse pelo id
+      tags: 
+      - "Pontos de interesse"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PontoDeInteresse'
+        404:
+          description: Ponto de interesse não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+  /tours:
+    get:
+      summary: Recupera todos os tours
+      tags: 
+      - Tours
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Tours'
+    post:
+      summary: Cria um novo tour
+      tags: 
+      - Tours
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                pontos_de_interesse:
+                  type: object
+                quizzes:
+                  type: object
+                created_at:
+                  type: integer
+                  example: "1667843830"
+                updated_at: 
+                  type: integer
+                  example: "1667843830"
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tour'
+  /tours/{id}:
+    parameters: 
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera um tour pelo id
+      tags: 
+      - Tours
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tour'
+        404:
+          description: Tour não encontrado
+          content:
+            application/json:
+              example: "Not found"
+    put:
+      summary: Atualiza um tour pelo id
+      tags:
+      - Tours
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                pontos_de_interesse:
+                  type: object
+                quizzes:
+                  type: object
+                created_at:
+                  type: integer
+                  example: "1667843830"
+                updated_at: 
+                  type: integer
+                  example: "1667843830"
+      responses: 
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quizz"
+        404:
+          description: Quizz não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    delete:
+      summary: Deleta uma tour pelo id
+      tags: 
+      - Tours
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tour'
+        404:
+          description: Tour não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+  /tours/{id}/pontos_de_interesse:
+    parameters: 
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera os pontos de interesse de um um tour
+      tags: 
+      - "Tours"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tours"
+        404:
+          description: Tour não encontrado
+          content:
+            application/json:
+              example: "Not found"
+  /tours/{id}/quizzes:
+    parameters: 
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera os quizzes de um tour
+      tags: 
+      - "Tours"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: 
+                    nome:
+                      type: object
+                    perguntas:
+                      type: object
+                    respostas:
+                      type: object
+                    created_at:
+                      type: integer
+                      example: "1667843830"
+                    updated_at: 
+                      type: integer
+                      example: "1667843830"                    
+        404:
+          description: Tour não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+security:
+  - auth: []
+components:
+  schemas:
+    Produto:
+      type: object
+      properties:
+        id: 
+          type: integer
+        nome:
+          type: string
+        imagem:
+          type: string
+        preco:
+          type: number
+        descricao:
+          type: string
+        created_at:
+          type: integer
+          example: "1667843830"
+        updated_at: 
+          type: integer
+          example: "1667843830"
+    Produtos:
+      type: array
+      items: 
+        $ref: "#/components/schemas/Produto"
+    Administrador:
+      type: object
+      properties: 
+        id: 
+          type: integer
+        nome:
+          type: string
+        imagem:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+        created_at:
+          type: integer
+          example: "1667843830"
+        updated_at: 
+          type: integer
+          example: "1667843830"
+    Administradores:
+      type: array
+      items: 
+        $ref: "#/components/schemas/Administrador"
+    Ala:
+      type: object
+      properties: 
+        id: 
+          type: integer
+        nome:
+          type: string
+        descricao:
+          type: string
+        pontos_de_interesse:
+          type: string
+        created_at:
+          type: integer
+          example: "1667843830"
+        updated_at: 
+          type: integer
+          example: "1667843830"
+    Alas:
+      type: array
+      items: 
+        $ref: "#/components/schemas/Ala"
+    Usuario:
+      type: object
+      properties: 
+        id: 
+          type: integer
+        emblemasId:
+          type: object
+        nome:
+          type: string
+        imagem:
+          type: string
+        email:
+          type: string
+        data_nascimento:
+          type: string
+        cpf:
+          type: string
+        celular:
+          type: string
+        cep:
+          type: string
+        pais:
+          type: string
+        estado:
+          type: string
+        cidade:
+          type: string
+        bairro:
+          type: string
+        endereco:
+          type: string
+        numero:
+          type: integer
+        senha:
+          type: string
+        quizzes:
+          type: object
+        compras:
+            type: object
+        created_at:
+          type: integer
+          example: "1667843830"
+        updated_at: 
+          type: integer
+          example: "1667843830"
+    Usuarios:
+      type: array
+      items: 
+        $ref: "#/components/schemas/Usuario"
+    Emblema:
+      type: object
+      properties: 
+        id: 
+          type: integer
+        nome:
+          type: string
+        imagem:
+          type: string
+        tipo:
+          type: string
+        created_at:
+          type: integer
+          example: "1667843830"
+        updated_at: 
+          type: integer
+          example: "1667843830"
+    Emblemas:
+      type: array
+      items: 
+        $ref: "#/components/schemas/Emblema"
+    Quizz:
+      type: object
+      properties: 
+        id: 
+          type: integer
+        tourId:
+          type: integer
+        nome:
+          type: string
+        perguntas:
+          type: object
+        respostas:
+          type: object
+        created_at:
+          type: integer
+          example: "1667843830"
+        updated_at: 
+          type: integer
+          example: "1667843830"
+    Quizzes:
+      type: array
+      items: 
+        $ref: "#/components/schemas/Quizz"
+    PontoDeInteresse:
+      type: object
+      properties: 
+        id: 
+          type: integer
+        tourId:
+          type: integer
+        ponto_id:
+          type: string
+        descricao:
+          type: object
+        created_at:
+          type: integer
+          example: "1667843830"
+        updated_at: 
+          type: integer
+          example: "1667843830"
+    PontosDeInteresse:
+      type: array
+      items: 
+        $ref: "#/components/schemas/PontoDeInteresse"
+    Tour:
+      type: object
+      properties: 
+        id: 
+          type: integer
+        nome:
+          type: string
+        pontos_de_interesse:
+          type: object
+        quizzes:
+          type: object
+        created_at:
+          type: integer
+          example: "1667843830"
+        updated_at: 
+          type: integer
+          example: "1667843830"
+    Tours:
+      type: array
+      items: 
+        $ref: "#/components/schemas/Tour"
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
