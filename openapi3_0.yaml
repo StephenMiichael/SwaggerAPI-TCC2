@@ -129,7 +129,6 @@ paths:
           content:
             application/json:
               example: "Not found"
-  
   /administradores:
     get:
       summary: Recupera todos os administradores
@@ -595,6 +594,48 @@ paths:
           content:
             application/json:
               example: "Not found"
+  /usuarios/{id}/favoritos:
+    parameters: 
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera as obras favoritas de um usuário
+      tags: 
+      - "Usuários"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties: 
+                    nome:
+                      type: object
+                    texto:
+                      type: object
+                    descricao:
+                      type: object
+                    imagem:
+                      type: string
+                    ponto_id:
+                      type: number
+                    created_at:
+                      type: integer
+                      example: "1667843830"
+                    updated_at: 
+                      type: integer
+                      example: "1667843830"                    
+        404:
+          description: Usuário não encontrado.
+          content:
+            application/json:
+              example: "Not found"
   /emblemas:
     get:
       summary: Recupera todas as emblemas
@@ -663,7 +704,8 @@ paths:
               example: "Not found"
     put:
       summary: Atualiza uma emblema pelo id
-        - "Emblemas"
+      tags:
+      - "Emblemas"
       requestBody:
         content:
           application/json:
