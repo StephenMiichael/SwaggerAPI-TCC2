@@ -337,7 +337,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Ala"
         404:
-          description: Ala não encontrado.
+          description: Ala não encontrada.
           content:
             application/json:
               example: "Not found"
@@ -352,6 +352,92 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Ala'
+        404:
+          description: Ala não encontrada.
+          content:
+            application/json:
+              example: "Not found"
+  /alas/{id}/pontos_de_interesse:
+    parameters: 
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera os pontos de interesse da ala pelo id
+      tags: 
+      - "Alas/Pontos de interesse"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PontosDeInteresse"
+        404:
+          description: Ala não encontrada.
+          content:
+            application/json:
+              example: "Not found"
+    post:
+      summary: Adiciona um de interesse para a ala
+      tags: 
+      - "Alas/Pontos de interesse"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id_ponto:
+                  type: number
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PontoDeInteresse'
+  /alas/{id_ala}/pontos_de_interesse/{id_ponto}:
+    parameters: 
+    - name: id_ala
+      in: path
+      schema:
+        type: integer
+      required: true
+    - name: id_ponto
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera o ponto de interesse da ala pelo id
+      tags: 
+      - "Alas/Pontos de interesse"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PontoDeInteresse"
+        404:
+          description: Ala não encontrada.
+          content:
+            application/json:
+              example: "Not found"
+    delete:
+      summary: Deleta o ponto de interesse da ala pelo id
+      tags: 
+        - "Alas/Pontos de interesse"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PontoDeInteresse'
         404:
           description: Ala não encontrada.
           content:
@@ -537,7 +623,7 @@ paths:
     get:
       summary: Recupera as emblemas de um usuário
       tags: 
-      - "Usuários"
+      - "Usuários/Emblemas"
       responses:
         200: 
           description: Sucesso
@@ -547,6 +633,69 @@ paths:
                 $ref: "#/components/schemas/Emblemas"
         404:
           description: Usuário não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    post:
+      summary: Adiciona uma emblema para o usuário
+      tags: 
+      - "Usuários/Emblemas"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Emblema"
+  /usuarios/{id_usuario}/emblemas{id_emblema}:
+    parameters: 
+    - name: id_usuario
+      in: path
+      schema:
+        type: integer
+      required: true
+    - name: id_emblema
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera uma emblema de um usuário
+      tags: 
+      - "Usuários/Emblemas"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Emblema"
+        404:
+          description: Usuário não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    delete:
+      summary: Deleta uma emblema de um usuário pelo id
+      tags: 
+        - "Usuários/Emblemas"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Emblema'
+        404:
+          description: Ala não encontrada.
           content:
             application/json:
               example: "Not found"
@@ -560,7 +709,7 @@ paths:
     get:
       summary: Recupera os quizzes de um usuário
       tags: 
-      - "Usuários"
+      - "Usuários/Quizz"
       responses:
         200: 
           description: Sucesso
@@ -594,6 +743,91 @@ paths:
           content:
             application/json:
               example: "Not found"
+    post:
+      summary: Adiciona um quizz para o usuário
+      tags: 
+      - "Usuários/Quizz"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id_quizz:
+                  type: number
+                respostas:
+                  type: object
+                pontuacao: 
+                  type: number
+                created_at: 
+                  type: integer
+                  example: "1667843830"
+                updated_at:
+                  type: integer
+                  example: "1667843830"
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Emblema"
+  /usuarios/{id_usuario}/quizzes/{id_quizz}:
+    parameters: 
+    - name: id_usuario
+      in: path
+      schema:
+        type: integer
+      required: true
+    - name: id_quizz
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera o quizz de um usuário pelo id
+      tags: 
+      - "Usuários/Quizz"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id_quizz:
+                    type: number
+                  respostas:
+                    type: object
+                  pontuacao: 
+                    type: number
+                  created_at: 
+                    type: integer
+                    example: "1667843830"
+                  updated_at:
+                    type: integer
+                    example: "1667843830"                    
+        404:
+          description: Quizz ou usuário não encontrados.
+          content:
+            application/json:
+              example: "Not found"
+    delete:
+      summary: Deleta um quizz de um usuário pelo id
+      tags: 
+        - "Usuários/Quizz"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+               example: "Quizz deletado com sucesso"
+        404:
+          description: Quizz ou usuário não encontrados.
+          content:
+            application/json:
+              example: "Not found"
   /usuarios/{id}/favoritos:
     parameters: 
     - name: id
@@ -604,7 +838,7 @@ paths:
     get:
       summary: Recupera as obras favoritas de um usuário
       tags: 
-      - "Usuários"
+      - "Usuários/Favoritos"
       responses:
         200: 
           description: Sucesso
@@ -633,6 +867,68 @@ paths:
                       example: "1667843830"                    
         404:
           description: Usuário não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    post:
+      summary: Adiciona um ponto de interesse aos favoritos do usuário
+      tags: 
+      - "Usuários/Favoritos"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id_ponto:
+                  type: number
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PontoDeInteresse"
+  /usuarios/{id_usuario}/favoritos/{id_favorito}:
+    parameters: 
+    - name: id_usuario
+      in: path
+      schema:
+        type: integer
+      required: true
+    - name: id_favorito
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera o favorito de um usuário pelo id
+      tags: 
+      - "Usuários/Favoritos"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/PontoDeInteresse"
+        404:
+          description: Quizz ou usuário não encontrados.
+          content:
+            application/json:
+              example: "Not found"
+    delete:
+      summary: Deleta um favorito de um usuário pelo id
+      tags: 
+        - "Usuários/Favoritos"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+               example: "Favorito deletado com sucesso"
+        404:
+          description: Favorito ou usuário não encontrados.
           content:
             application/json:
               example: "Not found"
@@ -894,8 +1190,6 @@ paths:
             schema:
               type: object
               properties:
-                tourId:
-                  type: number
                 ponto_id:
                   type: string
                 descricao:
@@ -1110,16 +1404,78 @@ paths:
     get:
       summary: Recupera os pontos de interesse de um um tour
       tags: 
-      - "Tours"
+      - "Tours/Pontos de interesse"
       responses:
         200: 
           description: Sucesso
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Tours"
+                $ref: "#/components/schemas/PontosDeInteresse"
         404:
           description: Tour não encontrado
+          content:
+            application/json:
+              example: "Not found"
+    post:
+      summary: Adiciona um ponto de interesse para o tour
+      tags: 
+      - "Tours/Pontos de interesse"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id_ponto:
+                  type: number
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PontoDeInteresse"
+  /tours/{id_tour}/pontos_de_interesse/{id_ponto}:
+    parameters: 
+    - name: id_tour
+      in: path
+      schema:
+        type: integer
+      required: true
+    - name: id_ponto
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera um ponto de interesse de um tour
+      tags: 
+      - "Tours/Pontos de interesse"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PontoDeInteresse"
+        404:
+          description: Tour ou ponto de interesse não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    delete:
+      summary: Deleta um ponto de interesse de um tour pelo id
+      tags: 
+        - "Tours/Pontos de interesse"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              example: "Ponto de interesse deletado com sucesso"
+        404:
+          description: Tour ou ponto de interesse não encontrado.
           content:
             application/json:
               example: "Not found"
@@ -1133,31 +1489,78 @@ paths:
     get:
       summary: Recupera os quizzes de um tour
       tags: 
-      - "Tours"
+      - "Tours/Quizz"
       responses:
         200: 
           description: Sucesso
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties: 
-                    nome:
-                      type: object
-                    perguntas:
-                      type: object
-                    respostas:
-                      type: object
-                    created_at:
-                      type: integer
-                      example: "1667843830"
-                    updated_at: 
-                      type: integer
-                      example: "1667843830"                    
+                $ref: "#/components/schemas/Quizzes"                    
         404:
           description: Tour não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    post:
+      summary: Adiciona um quizz para o tour
+      tags: 
+      - "Tours/Quizz"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id_quizz:
+                  type: number
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quizz"
+  /tours/{id_tour}/quizzes{id_quizz}:
+    parameters: 
+    - name: id_tour
+      in: path
+      schema:
+        type: integer
+      required: true
+    - name: id_quizz
+      in: path
+      schema:
+        type: integer
+      required: true
+    get:
+      summary: Recupera um quizz de um tour
+      tags: 
+      - "Tours/Quizz"
+      responses:
+        200: 
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PontoDeInteresse"
+        404:
+          description: Tour ou quizz não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    delete:
+      summary: Deleta um quizz de um tour pelo id
+      tags: 
+        - "Tours/Quizz"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              example: "Quizz deletado com sucesso"
+        404:
+          description: Tour ou quizz não encontrada.
           content:
             application/json:
               example: "Not found"
